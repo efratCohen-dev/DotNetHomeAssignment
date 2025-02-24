@@ -1,12 +1,12 @@
-using DAL.Data;
+using DAL.Reposetoies;
 using DAL.Interfaces;
 using Serilog;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using WebApplication1.Middleware;
+using UserManagementAPI.Middleware;
 
-namespace WebApplication1
+namespace UserManagementAPI
 {
     public class Program
     {
@@ -15,12 +15,12 @@ namespace WebApplication1
             var builder = WebApplication.CreateBuilder(args);
 
             Log.Logger = new LoggerConfiguration()
-                .WriteTo.Console()  // לוג לקונסול
-                .WriteTo.File("logs/myapp.txt", rollingInterval: RollingInterval.Day)  // לוג לקובץ
+                .WriteTo.Console()
+                .WriteTo.File("logs/myapp.txt", rollingInterval: RollingInterval.Day) 
                 .CreateLogger();
 
-            builder.Logging.ClearProviders();  // מסיר את כל הלוגים הקודמים
-            builder.Logging.AddSerilog();      // מוסיף את Serilog כ-provider
+            builder.Logging.ClearProviders();  
+            builder.Logging.AddSerilog();      
 
             // Add services to the container.
 
@@ -28,7 +28,7 @@ namespace WebApplication1
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddScoped<IUsers, Users>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             var app = builder.Build();
 

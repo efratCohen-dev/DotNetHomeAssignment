@@ -1,5 +1,5 @@
 ﻿
-using DAL.Data;
+using DAL.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
-    public interface IUsers
+    public interface IUserRepository
     {
-        IEnumerable<User> GetAllUsers();
-        User GetUserById(int id);
+        IEnumerable<UserDto> GetAllUsers();
+        UserDto GetUserById(int id);
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Data
+namespace DAL.DTOs
 {
-    public class User
+    public class UserDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

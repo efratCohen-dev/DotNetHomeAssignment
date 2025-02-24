@@ -4,7 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace WebApplication1.Middleware
+namespace UserManagementAPI.Middleware
 {
     public class LoggingMiddleware
     {

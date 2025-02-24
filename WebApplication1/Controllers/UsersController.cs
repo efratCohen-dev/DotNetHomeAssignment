@@ -1,29 +1,29 @@
-﻿using DAL;
-using DAL.Data;
+﻿using DAL.Reposetoies;
 using DAL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
+using DAL.DTOs;
 
-namespace WebApplication1.Controllers
+namespace UserManagementAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly IUsers _users;
+        private readonly IUserRepository _userRepository;
 
-        public UsersController(IUsers users)
+        public UsersController(IUserRepository userRepository)
         {
-            _users = users;
+            _userRepository = userRepository;
         }
 
         // פעולה לקבלת כל המשתמשים
         [HttpGet]
-        public ActionResult<IEnumerable<User>> GetUsers()
+        public ActionResult<IEnumerable<UserDto>> GetUsers()
         {
             try
             {
-                var users = _users.GetAllUsers();
+                var users = _userRepository.GetAllUsers();
                 return Ok(users);
             }
             catch (Exception ex)
@@ -34,12 +34,12 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<User> GetUserById(int id)
+        public ActionResult<UserDto> GetUserById(int id)
         {
 
             try
             {
-                var user = _users.GetUserById(id);
+                var user = _userRepository.GetUserById(id);
                 if (user == null)
                 {
                     Log.Warning("User with id {UserId} not found.", id);  
